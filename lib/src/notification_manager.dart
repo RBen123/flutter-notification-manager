@@ -92,4 +92,20 @@ final class NotificationManager {
   Future<List<NotificationChannelGroup>> getNotificationChannelGroups() async {
     return NotificationManagerPlatform.instance.getNotificationChannelGroups();
   }
+
+  /// Returns notification channel can bypass dnd.
+  Future<bool?> getNotificationChannelCanBypassDnd(
+    String channelId,
+  ) {
+    return NotificationManagerPlatform.instance
+        .getNotificationChannelCanBypassDnd(
+      channelId,
+    );
+  }
+
+  /// Returns dnd active state.
+  Future<bool?> getNotificationManagerDndActive() {
+    return NotificationManagerPlatform.instance
+        .getNotificationManagerDndActive();
+  }
 }
