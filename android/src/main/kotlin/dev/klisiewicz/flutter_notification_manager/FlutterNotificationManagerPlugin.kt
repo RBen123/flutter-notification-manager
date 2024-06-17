@@ -89,12 +89,20 @@ class FlutterNotificationManagerPlugin : FlutterPlugin, MethodCallHandler {
                     result.success(getNotificationChannels(call))
                 }
 
+                "getNotificationChannelCanBypassDnd" -> {
+                    result.success(getNotificationChannelCanBypassDnd(call))
+                }
+
+                "getNotificationManagerDndActive" -> {
+                    result.success(getNotificationManagerDndActive(call))
+                }
+
                 else -> result.notImplemented()
             }
         } catch (e: IllegalArgumentException) {
             Log.e(TAG, e.message, e);
             result.error("INVALID_ARGUMENT", e.message, call.arguments)
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             Log.e(TAG, e.message, e);
             result.error("UNKNOWN", e.message, call.arguments)
         }
@@ -166,5 +174,17 @@ class FlutterNotificationManagerPlugin : FlutterPlugin, MethodCallHandler {
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
+    }
+
+    @TargetApi(VERSION_CODES.O)
+    private fun getNotificationChannelCanBypassDnd(call: MethodCall): Boolean {
+        val channelId = call.argument<String>("channelId")
+        val channel = notificationManager.getNotificationChannel(channelId)
+        return channel.canBypassDnd()
+    }
+
+    @TargetApi(VERSION_CODES.O)
+    private fun getNotificationManagerDndActive(call: MethodCall): Boolean {
+        return (notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_NONE && notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_UNKNOWN)
     }
 }

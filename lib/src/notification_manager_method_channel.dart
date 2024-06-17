@@ -97,4 +97,23 @@ class MethodChannelNotificationManager extends NotificationManagerPlatform {
     );
     return groups?.map((NotificationChannelGroup.fromJson)).toList() ?? [];
   }
+
+  @override
+  Future<bool?> getNotificationChannelCanBypassDnd(
+      String channelId,
+      ) async {
+    final canBypassDnd = await methodChannel
+        .invokeMethod('getNotificationChannelCanBypassDnd', {
+      'channelId': channelId,
+    });
+    return canBypassDnd;
+  }
+
+  @override
+  Future<bool?> getNotificationManagerDndActive(
+      ) async {
+    final dndActive = await methodChannel
+        .invokeMethod('getNotificationManagerDndActive');
+    return dndActive;
+  }
 }
