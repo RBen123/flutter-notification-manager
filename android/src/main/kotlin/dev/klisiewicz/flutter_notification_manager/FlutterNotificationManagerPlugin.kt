@@ -185,6 +185,6 @@ class FlutterNotificationManagerPlugin : FlutterPlugin, MethodCallHandler {
 
     @TargetApi(VERSION_CODES.O)
     private fun getNotificationManagerDndActive(call: MethodCall): Boolean {
-        return (notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_NONE && notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_UNKNOWN)
+        return (notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL && notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_UNKNOWN)
     }
 }
