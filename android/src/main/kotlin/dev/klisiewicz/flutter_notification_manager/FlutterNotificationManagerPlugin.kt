@@ -97,10 +97,6 @@ class FlutterNotificationManagerPlugin : FlutterPlugin, MethodCallHandler {
                     result.success(getNotificationManagerDndActive(call))
                 }
 
-                "clearNotificationWithId" -> {
-                    result.success(clearNotificationWithId(call))
-                }
-
                 else -> result.notImplemented()
             }
         } catch (e: IllegalArgumentException) {
@@ -190,12 +186,5 @@ class FlutterNotificationManagerPlugin : FlutterPlugin, MethodCallHandler {
     @TargetApi(VERSION_CODES.O)
     private fun getNotificationManagerDndActive(call: MethodCall): Boolean {
         return (notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL && notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_UNKNOWN)
-    }
-
-    @TargetApi(VERSION_CODES.O)
-    private fun clearNotificationWithId(call: MethodCall): Boolean {
-        val messageId = call.argument<String>("messageId")
-        notificationManager.cancel(messageId)
-        return true
     }
 }

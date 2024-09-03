@@ -50,6 +50,4 @@ abstract class NotificationManagerPlatform extends PlatformInterface {
   Future<bool?> getNotificationChannelCanBypassDnd(String channelId);
 
   Future<bool?> getNotificationManagerDndActive();
-
-  Future<bool?> clearNotificationWithId(String messageId);
 }

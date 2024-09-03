@@ -116,15 +116,4 @@ class MethodChannelNotificationManager extends NotificationManagerPlatform {
         .invokeMethod('getNotificationManagerDndActive');
     return dndActive;
   }
-
-  @override
-  Future<bool?> clearNotificationWithId(
-      String messageId,
-      ) async {
-    final notificationCleared = await methodChannel
-        .invokeMethod('clearNotificationWithId', {
-      'messageId': messageId,
-    });
-    return notificationCleared;
-  }
 }
