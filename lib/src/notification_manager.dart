@@ -108,4 +108,14 @@ final class NotificationManager {
     return NotificationManagerPlatform.instance
         .getNotificationManagerDndActive();
   }
+
+  /// Clear notification with id.
+  Future<bool?> clearNotificationWithId(
+      String messageId,
+      ) {
+    return NotificationManagerPlatform.instance
+        .clearNotificationWithId(
+      messageId,
+    );
+  }
 }
